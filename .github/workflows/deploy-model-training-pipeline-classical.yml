@@ -17,7 +17,9 @@ jobs:
         conda_file: data-science/environment/train-conda.yml
       secrets:
           client_id: ${{ secrets.AZURE_CLIENT_ID }}
+      secrets:
           tenant_id: ${{ secrets.AZURE_TENANT_ID }}
+      secrets:
           subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           
   register-dataset:
@@ -29,9 +31,11 @@ jobs:
       name: taxi-data
       data_file: mlops/azureml/train/data.yml
     secrets:
-      client_id: ${{ secrets.AZURE_CLIENT_ID }}
-      tenant_id: ${{ secrets.AZURE_TENANT_ID }}
-      subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          client_id: ${{ secrets.AZURE_CLIENT_ID }}
+    secrets:
+          tenant_id: ${{ secrets.AZURE_TENANT_ID }}
+    secrets:
+          subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       
   create-compute:
       needs: [get-config,register-environment,register-dataset]
@@ -46,7 +50,9 @@ jobs:
         workspace_name: ${{ needs.get-config.outputs.aml_workspace }}     
       secrets:
           client_id: ${{ secrets.AZURE_CLIENT_ID }}
+      secrets:
           tenant_id: ${{ secrets.AZURE_TENANT_ID }}
+      secrets:
           subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       
   run-pipeline:
@@ -59,5 +65,7 @@ jobs:
         job-name: test
       secrets:
           client_id: ${{ secrets.AZURE_CLIENT_ID }}
+      secrets:
           tenant_id: ${{ secrets.AZURE_TENANT_ID }}
+      secrets:
           subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
